@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
-namespace Digital.Infrastructure.Utilities
+namespace v
 {
     public class HttpCilentService
     {
