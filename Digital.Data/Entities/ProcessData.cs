@@ -12,9 +12,9 @@ namespace Digital.Data.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public string? Description { get; set; }
-        public string DateUpload { get; set; }
+        public string? DateUpload { get; set; }
         public virtual Process? Process { get; set; }
 
 
