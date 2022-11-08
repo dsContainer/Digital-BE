@@ -26,6 +26,12 @@ namespace Digital.Data.Data
         public DbSet<Document> Documents { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<Signature> Signatures { get; set; }
+        public DbSet<Process> Processes { get; set; }
+        public DbSet<ProcessData> ProcessDatas { get; set; }
+        public DbSet<ProcessStep> ProcessSteps { get; set; }
+        public DbSet<Template> Templates { get; set; }
+        public DbSet<Batch> Batches { get; set; }
+
         #endregion
     }
 }

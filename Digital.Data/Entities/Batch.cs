@@ -12,8 +12,8 @@ namespace Digital.Data.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
 
         public virtual ICollection<Process>? Process { get; set; } = new List<Process>();
 

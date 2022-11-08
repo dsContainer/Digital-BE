@@ -15,8 +15,8 @@ namespace Digital.Data.Entities
         public Guid Id { get; set; }
         public string? Name { get; set; }
         public float? OrderIndex { get; set; }
-        [ForeignKey("Signer")]
-        public Guid? Signer { get; set; }
+        [ForeignKey("UserId")]
+        public Guid UserId { get; set; }
         public virtual User? User { get; set; }
         public float XPoint { get; set; }
         public float YPoint { get; set; }

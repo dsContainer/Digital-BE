@@ -12,7 +12,7 @@ namespace Digital.Data.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public string? NormalizationName { get; set; }
         public string? Description { get; set; }
         public bool IsActive { get; set; }
