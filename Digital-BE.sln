@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital-BE", "Digital-BE\Digital-BE.csproj", "{BE1D43CF-6B1B-4A48-AE5C-94CE671BE6ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.API", "Digital-BE\Digital.API.csproj", "{BE1D43CF-6B1B-4A48-AE5C-94CE671BE6ED}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.Data", "Digital.Data\Digital.Data.csproj", "{7ED33E9E-0315-492A-AC27-D2DFD14BEFCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Infrastructure", "Digital.Infrastructure\Digital.Infrastructure.csproj", "{30D1DB24-AC42-40B5-831B-68FC9B3FA543}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.Infrastructure", "Digital.Infrastructure\Digital.Infrastructure.csproj", "{30D1DB24-AC42-40B5-831B-68FC9B3FA543}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
