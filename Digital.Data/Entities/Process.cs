@@ -19,9 +19,6 @@ namespace Digital.Data.Entities
         [ForeignKey("ProcessStepId")]
         public string? ProcessStepId { get; set; }
         public virtual ICollection<ProcessStep>? ProcessStep { get; set; } = new List<ProcessStep>();
-        [ForeignKey("BatchId")]
-        public string? BatchId { get; set; }
-        public virtual Batch? Batch { get; set; }
 
     }
 }

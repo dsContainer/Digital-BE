@@ -1,10 +1,27 @@
 ﻿
 using Digital.Data.Data;
 using Digital_BE.Extensions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+/*var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    ApplicationName = typeof(Program).Assembly.FullName,
+    ContentRootPath = Directory.GetCurrentDirectory(),
+    EnvironmentName = Environments.Staging,
+    WebRootPath = "customwwwroot"
+});*/
+
+/*static IHostBuilder CreateHostBuilder(string[] args)
+        => Host.CreateDefaultBuilder(args)
+.ConfigureWebHostDefaults(
+                webBuilder => webBuilder.UseStartup<Program>());*/
+
+// migrate any database changes on startup (includes initial db creation)
+
 
 // Add services to the container.
 
@@ -26,6 +43,7 @@ builder.Services.Configure<FormOptions>(x =>
 });
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

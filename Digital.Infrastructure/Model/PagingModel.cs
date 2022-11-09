@@ -31,3 +31,4 @@ namespace Digital.Infrastructure.Model
         }
 
     }
+}
