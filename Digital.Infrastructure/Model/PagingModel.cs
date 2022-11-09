@@ -29,5 +29,5 @@ namespace Digital.Infrastructure.Model
             TotalPage = (int)Math.Ceiling(TotalSize / (double)PageSize);
             PageSkip = (PageIndex - 1) * PageSize;
         }
-
+        }
     }
