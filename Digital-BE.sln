@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital-BE", "Digital-BE\Di
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.Data", "Digital.Data\Digital.Data.csproj", "{7ED33E9E-0315-492A-AC27-D2DFD14BEFCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Infrastructure", "Digital.Infrastructure\Digital.Infrastructure.csproj", "{30D1DB24-AC42-40B5-831B-68FC9B3FA543}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.Infrastructure", "Digital.Infrastructure\Digital.Infrastructure.csproj", "{30D1DB24-AC42-40B5-831B-68FC9B3FA543}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
