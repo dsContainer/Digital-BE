@@ -10,7 +10,7 @@
   "profiles": {
     "Digital_BE": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "https://localhost:7073;http://localhost:5007",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

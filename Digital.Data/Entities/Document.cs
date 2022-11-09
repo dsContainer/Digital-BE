@@ -22,9 +22,6 @@ namespace Digital.Data.Entities
         [ForeignKey("ProcessId")]
         public Guid ProcessId { get; set; }
         public virtual Process? Process { get; set; }
-
-
-
     }
 }
 

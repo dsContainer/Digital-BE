@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Reflection;
-using Newtonsoft.Json.Converters;
-using System.Text;
-using Microsoft.OpenApi.Models;
-using Microsoft.IdentityModel.Tokens;
+﻿using AutoMapper;
 using Digital.Data.Data;
+using Digital.Infrastructure.Interface;
+using Digital.Infrastructure.Mapper;
+using Digital.Infrastructure.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
+using System.Reflection;
+using System.Text;
 
-namespace Digital_BE.Extensions
+namespace Digital_Signature.Api.Extensions
 {
     public static class StartupExtensions
     {
@@ -24,8 +28,8 @@ namespace Digital_BE.Extensions
 
                 c.UseInlineDefinitionsForEnums();
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //c.IncludeXmlComments(xmlPath);
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -84,7 +88,8 @@ namespace Digital_BE.Extensions
         public static void AddBusinessService(this IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            
+            services.AddScoped<IJwtTokenService, JwtTokenService>();
+            services.AddScoped<IDocumentTypeService, DocumentTypeService>();
 
         }
 
@@ -98,15 +103,15 @@ namespace Digital_BE.Extensions
             );
         }
 
-        //public static void AddAutoMapper(this IServiceCollection services)
-        //{
-        //    var mappingConfig = new MapperConfiguration(mc =>
-        //    {
-        //        mc.AddProfile(new MappingProfile());
-        //    });
-        //    IMapper mapper = mappingConfig.CreateMapper();
-        //    services.AddSingleton(mapper);
-        //}
+        public static void AddAutoMapper(this IServiceCollection services)
+        {
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+        }
 
         public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
         {
@@ -129,5 +134,10 @@ namespace Digital_BE.Extensions
             }
         }
 
+        //public static void AddHttpClients(this IServiceCollection services)
+        //{
+        //    services.AddHttpClient<ISystemManagementService, SystemManagementService>();
+        //    services.AddHttpClient<IDocumentManagementService, DocumentManagementService>();
+        //}
     }
 }
