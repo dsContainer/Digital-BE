@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 namespace Digital.Data.Utilities.Exceptions;
 
 public class InputValidationException : Exception

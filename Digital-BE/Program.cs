@@ -2,6 +2,7 @@
 using Digital.Data.Data;
 using Digital_BE.Extensions;
 using Microsoft.AspNetCore.Hosting;
+using Digital_Signature.Api.Extensions;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,7 @@ builder.Services.ConfigCors();
 builder.Services.AddDbContext(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddBusinessService();
+builder.Services.AddAutoMapper();
 
 builder.Services.Configure<FormOptions>(x =>
 {
