@@ -17,12 +17,15 @@ namespace Digital.Data.Entities
         public string Password { get; set; }
         [ForeignKey("RoleId")]
         public Guid RoleId { get; set; }
-        public virtual ICollection<Role>? Role { get; set; } = new List<Role>();
+        public virtual ICollection<Role>? Roles { get; set; } = new List<Role>();
         [ForeignKey("SigId")]
         public Guid SigId { get; set; }
         public virtual Signature? Signature { get; set; }
         public virtual ICollection<Document>? Document { get; set; } = new List<Document>();
         public virtual ProcessStep? ProcessStep { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
 
