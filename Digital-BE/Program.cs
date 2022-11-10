@@ -7,22 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Digital.Infrastructure.Service;
 
 var builder = WebApplication.CreateBuilder(args);
-/*var builder = WebApplication.CreateBuilder(new WebApplicationOptions
-{
-    Args = args,
-    ApplicationName = typeof(Program).Assembly.FullName,
-    ContentRootPath = Directory.GetCurrentDirectory(),
-    EnvironmentName = Environments.Staging,
-    WebRootPath = "customwwwroot"
-});*/
-
-/*static IHostBuilder CreateHostBuilder(string[] args)
-        => Host.CreateDefaultBuilder(args)
-.ConfigureWebHostDefaults(
-                webBuilder => webBuilder.UseStartup<Program>());*/
-
-// migrate any database changes on startup (includes initial db creation)
-
 
 // Add services to the container.
 
