@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Digital.Data.Data;
+using Digital.Data.Entities;
 using Digital.Infrastructure.Interface;
 using Digital.Infrastructure.Model;
 using Digital.Infrastructure.Utilities;
@@ -26,7 +27,7 @@ namespace Digital.Infrastructure.Service
             _mapper = mapper;
         }
 
-        public  Task<ResultModel> CreateSignatureByUserId(Guid userId)
+        public Task<ResultModel> CreateSignatureByUserId(Guid userId)
         {
             var result = new ResultModel();
             try
@@ -35,6 +36,15 @@ namespace Digital.Infrastructure.Service
                 if (userToCreate != null)
                 {
                     string message = SignatureUtils.createCertificate(userToCreate.Username);
+                    var signature = new Signature
+                    {
+                        FromDate = DateTime.Now,
+                        ToDate = DateTime.Now.AddYears(1),
+                        IsDelete = false,
+                        UserId = userId
+                    };
+                    _context.Signatures.AddAsync(signature);
+                    _context.SaveChangesAsync();
                     result.IsSuccess = true;
                     result.Code = 200;
                     result.ResponseSuccess = message;
