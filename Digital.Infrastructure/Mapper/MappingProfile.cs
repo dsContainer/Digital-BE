@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using Digital.Data.Entities;
 using Digital.Infrastructure.Model.DocumentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Digital.Infrastructure.Model.Requests;
 
 namespace Digital.Infrastructure.Mapper
 {
@@ -15,7 +11,11 @@ namespace Digital.Infrastructure.Mapper
         {
             #region DocumentType
             CreateMap<DocumentType, DocumentTypeViewModel>();
-            CreateMap< DocumentTypeCreateModel, DocumentType>();
+            CreateMap<DocumentTypeCreateModel, DocumentType>();
+            #endregion
+
+            #region User
+            CreateMap<UserRequest, User>();
             #endregion
         }
     }
