@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'digital-BE'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B8841036F3F848C7A2D8EE6BEB560064 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8DC37236FAC441AA91B14E1CB3396339 }}
           package: .
