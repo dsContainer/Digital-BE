@@ -13,13 +13,14 @@ namespace Digital.Data.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public string? Name { get; set; }
         public float? OrderIndex { get; set; }
         [ForeignKey("UserId")]
         public Guid UserId { get; set; }
         public virtual User? User { get; set; }
         public float XPoint { get; set; }
         public float YPoint { get; set; }
+        public float XPointPercent { get; set; }
+        public float YPointPercent { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
         public int PageSign { get; set; }

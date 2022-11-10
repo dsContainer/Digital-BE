@@ -5,17 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Digital.Infrastructure.Model.ProcessModel;
 
 namespace Digital.Infrastructure.Interface
 {
     public interface IProcessService
     {
-        Task<ResultModel> GetProcesses();
+        Task<ResultModel> GetProcesses(ProcessSearchModel searchModel);
         Task<ResultModel> GetProcessById(Guid id);
-        Task<ResultModel> GetProcessByDocumentType(Guid id);
-        Task<ResultModel> GetProcessByCreatedDate(Guid id);
-        Task<ResultModel> CreateProcess(DocumentTypeCreateModel model);
-        Task<int> DisableProcess(Guid id);
-        Task<ResultModel> UpdateProcess(DocumentTypeUpdateModel model, Guid Id);
+        Task<ResultModel> GetProcessByDocumentType(Guid docTypeId);
+        Task<ResultModel> GetProcessByCreatedDate(DateTime createdDate);
+        Task<ResultModel> CreateProcess(ProcessCreateModel model);
+        Task<int> DeleteProcess(Guid id);
+        Task<ResultModel> UpdateProcess(ProcessUpdateModel model, Guid Id);
     }
 }

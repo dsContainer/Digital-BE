@@ -81,7 +81,7 @@ namespace Digital.Infrastructure.Service
 
                 if (docTypes == null)
                 {
-                    result.Code = 400;
+                    result.Code = 40;
                     result.IsSuccess = false;
                     result.ResponseSuccess = $"Any DocumentType Not Found!";
                     return result;

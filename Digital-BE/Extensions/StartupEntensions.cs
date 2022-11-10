@@ -90,6 +90,7 @@ namespace Digital_Signature.Api.Extensions
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IDocumentTypeService, DocumentTypeService>();
+            services.AddScoped<IProcessService, ProcessService>();
             services.AddScoped<IUserService, UserService>();
         }
 

@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Digital.Infrastructure.Interface;
+using Digital.Infrastructure.Model.ProcessModel;
+using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Digital_BE.Controller
 {
@@ -8,36 +9,89 @@ namespace Digital_BE.Controller
     [ApiController]
     public class ProcessController : ControllerBase
     {
-        // GET: api/<ProcessController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IProcessService _service;
+
+        public ProcessController(IProcessService service)
         {
-            return new string[] { "value1", "value2" };
+            _service = service;
         }
 
-        // GET api/<ProcessController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<ProcessController>
+        /// <summary>
+        /// Create a new process
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> CreateProcess(ProcessCreateModel model)
         {
+            var result = await _service.CreateProcess(model);
+
+            if (result.IsSuccess && result.Code == 200) return Ok(result.ResponseSuccess);
+            return BadRequest(result);
         }
 
-        // PUT api/<ProcessController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        /// <summary>
+        /// get a process by Id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetProcessById(Guid Id)
         {
+            if (Id != null)
+            {
+                var result = await _service.GetProcessById(Id);
+                return Ok(result);
+            }
+            return NotFound();
         }
 
-        // DELETE api/<ProcessController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        /// <summary>
+        /// get all processes
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetProcesses([FromQuery] ProcessSearchModel searchModel)
         {
+            var result = await _service.GetProcesses(searchModel);
+            if (result.Code == 200)
+                return Ok(result);
+            else if (result.Code == 404)
+                return NotFound(result);
+            return BadRequest(result);
+        }
+
+        /// <summary>
+        /// delete process
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            var result = await _service.DeleteProcess(Id);
+            if (result > 0)
+            {
+                return Ok(result);
+            }
+            return NotFound();
+        }
+
+
+        /// <summary>
+        /// update process
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> Update(ProcessUpdateModel model, Guid Id)
+        {
+            var result = await _service.UpdateProcess(model, Id);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return NotFound();
         }
     }
 }
