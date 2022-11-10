@@ -1,6 +1,5 @@
 ﻿
 using Digital.Data.Data;
-using Digital_BE.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Digital_Signature.Api.Extensions;
 using Microsoft.AspNetCore.Http.Features;
