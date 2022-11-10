@@ -1,12 +1,7 @@
 ﻿using Digital.Data.Entities;
 using Digital.Infrastructure.Model.Requests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Digital.Infrastructure.Service.UserService
+namespace Digital.Infrastructure.Interface
 {
     public interface IUserService
     {

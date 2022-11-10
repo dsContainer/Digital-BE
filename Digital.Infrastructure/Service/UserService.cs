@@ -1,21 +1,19 @@
-﻿using Digital.Data.Data;
+﻿using AutoMapper;
+using Digital.Data.Data;
 using Digital.Data.Entities;
+using Digital.Infrastructure.Interface;
 using Digital.Infrastructure.Model.Requests;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Digital.Infrastructure.Service.UserService
+namespace Digital.Infrastructure.Service
 {
     public class UserService : IUserService
     {
-        ApplicationDBContext _context;
-        public UserService(ApplicationDBContext context)
+        private readonly ApplicationDBContext _context;
+        private readonly IMapper _mapper;
+        public UserService(ApplicationDBContext context, IMapper mapper)
         {
-            _context= context;
+            _context = context;
+            _mapper = mapper;
         }
 
         public List<User> GetUsers()
@@ -32,20 +30,10 @@ namespace Digital.Infrastructure.Service.UserService
 
         public User CreateUser(UserRequest userRequest)
         {
-            User user = new()
-            {
-                Id = Guid.NewGuid(),
-                Email = userRequest.Email,
-                Phone = userRequest.Phone,
-                Username = userRequest.Username,
-                FullName = userRequest.FullName,
-                Password = userRequest.Password,
-                RoleId = userRequest.RoleId,
-                SigId = userRequest.SigId,
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now,
-                IsDeleted = userRequest.IsDeleted
-            };
+            var user = _mapper.Map<User>(userRequest);
+            user.Id = Guid.NewGuid();
+            user.DateCreated = DateTime.Now;
+            user.DateUpdated = DateTime.Now;
 
             _context.Users.Add(user);
 
@@ -60,15 +48,8 @@ namespace Digital.Infrastructure.Service.UserService
 
             if (user != null)
             {
-                user.Email = userRequest.Email;
-                user.Phone = userRequest.Phone;
-                user.Username = userRequest.Username;
-                user.FullName = userRequest.FullName;
-                user.Password = userRequest.Password;
-                user.RoleId = userRequest.RoleId;
-                user.SigId = userRequest.SigId;
+                user = _mapper.Map(userRequest, user);
                 user.DateUpdated = DateTime.Now;
-                user.IsDeleted = userRequest.IsDeleted;
 
                 _context.Users.Update(user);
 
