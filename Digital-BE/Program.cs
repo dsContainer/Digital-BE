@@ -1,10 +1,10 @@
 ﻿
 using Digital.Data.Data;
-using Digital.Infrastructure.Service.UserService;
 using Microsoft.AspNetCore.Hosting;
 using Digital_Signature.Api.Extensions;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
+using Digital.Infrastructure.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 /*var builder = WebApplication.CreateBuilder(new WebApplicationOptions
@@ -35,8 +35,6 @@ builder.Services.AddDbContext(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddBusinessService();
 builder.Services.AddAutoMapper();
-
-builder.Services.AddScoped<UserService>();
 
 builder.Services.Configure<FormOptions>(x =>
 {

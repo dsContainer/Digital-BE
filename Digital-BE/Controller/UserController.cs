@@ -1,13 +1,7 @@
-﻿using Digital.Data.Data;
-using Digital.Data.Entities;
+﻿using Digital.Infrastructure.Interface;
 using Digital.Infrastructure.Model;
 using Digital.Infrastructure.Model.Requests;
-using Digital.Infrastructure.Service.UserService;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using System;
 
 namespace Digital_BE.Controller
 {
@@ -15,8 +9,8 @@ namespace Digital_BE.Controller
     [ApiController]
     public class UserController : ControllerBase
     {
-        IUserService _userService;
-        public UserController(UserService userService)
+        private readonly IUserService _userService;
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
