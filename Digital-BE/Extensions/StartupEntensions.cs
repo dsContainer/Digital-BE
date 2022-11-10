@@ -91,6 +91,7 @@ namespace Digital_Signature.Api.Extensions
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IDocumentTypeService, DocumentTypeService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISignatureService, SignatureService>();
         }
 
         public static void ConfigCors(this IServiceCollection services)

@@ -14,6 +14,7 @@ namespace Digital.Infrastructure.Utilities
     {
         public static string createCertificate(string userName)
         {
+            userName = "CN="+userName;
             string subject = "C=GB, ST=Berkshire, L=Reading, O=MY COMPANY";
             string localLocation = "E:\\C#\\Resources\\Signing\\Certificate\\testGenCer";
             try

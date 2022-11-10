@@ -3,6 +3,7 @@ using Digital.Infrastructure.Model;
 using Digital.Infrastructure.Model.DocumentModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Digital.Infrastructure.Model.Requests;
 
 namespace Digital_BE.Controller
 {
@@ -48,20 +49,6 @@ namespace Digital_BE.Controller
             return BadRequest(result);
         }
 
-        /// <summary>
-        /// Search signature contain username or email or phone
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResultModel))]
-        [HttpGet("SearchContainData")]
-        public async Task<IActionResult> SearchContainUserNamePhoneOrEmail(string data)
-        {
-            var result = await _service.SearchContainUserNamePhoneOrEmail(data);
-
-            if (result.IsSuccess && result.Code == 200) return Ok(result.ResponseSuccess);
-            return BadRequest(result);
-        }
 
         /// <summary>
         /// Search signature by sigId
@@ -85,7 +72,7 @@ namespace Digital_BE.Controller
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResultModel))]
         [HttpGet("SearchRangeDate")]
-        public async Task<IActionResult> SearchRangeDate(DateTime fromDate, DateTime toDate)
+        public async Task<IActionResult> SearchRangeDate( string fromDate, string toDate)
         {
             var result = await _service.SearchRangeDate(fromDate, toDate);
 
