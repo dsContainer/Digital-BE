@@ -11,7 +11,7 @@ using Newtonsoft.Json.Converters;
 using System.Reflection;
 using System.Text;
 
-namespace Digital_Signature.Api.Extensions
+namespace Digital_BE.Api.Extensions
 {
     public static class StartupExtensions
     {
