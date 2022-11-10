@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Digital_Signature.Api.Extensions;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
+using Digital.Infrastructure.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 /*var builder = WebApplication.CreateBuilder(new WebApplicationOptions
@@ -42,6 +43,8 @@ builder.Services.Configure<FormOptions>(x =>
     x.MultipartHeadersLengthLimit = int.MaxValue;
     x.MultipartBodyLengthLimit = int.MaxValue; // In case of multipart
 });
+
+
 
 var app = builder.Build();
 
