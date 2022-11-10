@@ -13,7 +13,9 @@ namespace Digital.Data.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string? Name { get; set; }
-        public string? Template { get; set; }
+        [ForeignKey("TemplateId")]
+        public Guid? TemplateId { get; set; }
+        public virtual Template? Template { get; set; }
         public string? Status { get; set; }
         public string? CompanyLevel { get; set; }
         [ForeignKey("ProcessStepId")]
