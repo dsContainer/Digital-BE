@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureSwagger();
 builder.Services.AddAutoMapper();
-builder.Services.AddJWTAuthentication(builder.Configuration);
+//builder.Services.AddJWTAuthentication(builder.Configuration);
 builder.Services.ConfigCors();
 builder.Services.AddDbContext(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
@@ -30,7 +30,7 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseAuthentication();
+//app.UseAuthentication();
 
 
 app.MapControllers();
