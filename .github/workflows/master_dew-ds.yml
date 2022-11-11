@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'dew-ds'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F2E97A6548344C6BBE66C6A9D010E977 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_77F17576CEBC47BE8B4CF20AC125CD8B }}
           package: .
