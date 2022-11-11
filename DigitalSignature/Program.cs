@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
-builder.Services.ConfigureSwagger();
+//builder.Services.ConfigureSwagger();
 builder.Services.AddAutoMapper();
 builder.Services.AddJWTAuthentication(builder.Configuration);
 builder.Services.ConfigCors();
