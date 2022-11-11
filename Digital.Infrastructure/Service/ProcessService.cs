@@ -37,7 +37,7 @@ namespace Digital.Infrastructure.Service
 
                 result.IsSuccess = true;
                 result.Code = 200;
-                result.ResponseSuccess = _mapper.Map<Process>(process);
+                result.ResponseSuccess = process;
 
                 await transaction.CommitAsync();
             }
@@ -67,7 +67,10 @@ namespace Digital.Infrastructure.Service
             var result = new ResultModel();
             try
             {
-                var processes = _context.Processes.Where(x => x.Id == id);
+                var processes = await _context.Processes.
+                    Include(e => e.ProcessStep). 
+                    Where(x => x.Id == id).
+                    FirstOrDefaultAsync();
 
                 if (processes == null)
                 {
@@ -96,7 +99,7 @@ namespace Digital.Infrastructure.Service
             var result = new ResultModel();
             try
             {
-                var processes = _context.Processes.Where(x => !x.IsDeleted);
+                var processes = await _context.Processes.Include(e => e.ProcessStep).ToListAsync();
 
                 if (!processes.Any())
                 {
@@ -108,7 +111,10 @@ namespace Digital.Infrastructure.Service
 
                 if(searchModel.CreatedDate != null)
                 {
-                    processes = processes.Where(x => x.DateCreated == searchModel.CreatedDate);
+                    processes = await _context.Processes.
+                        Include(e => e.ProcessStep).
+                        Where(x => x.DateCreated == searchModel.CreatedDate).
+                        ToListAsync();
                 }
 
                 result.Code = 200;
@@ -125,13 +131,13 @@ namespace Digital.Infrastructure.Service
             return result;
         }
 
-        public async Task<ResultModel> UpdateProcess(ProcessUpdateModel model, Guid Id)
+        public async Task<ResultModel> UpdateProcess(ProcessUpdateModel model)
         {
             var result = new ResultModel();
             var transaction = _context.Database.BeginTransaction();
             try
             {
-                var process = await _context.Processes.FindAsync(Id);
+                var process = await _context.Processes.FindAsync(model.Id);
                 if (process == null)
                 {
                     result.Code = 200;
@@ -140,14 +146,38 @@ namespace Digital.Infrastructure.Service
                     return result;
                 }
 
-                var newProcess = _mapper.Map<Process>(model);
-                _context.Processes.Update(newProcess);
+                process.Name = model.Name;
+                process.CompanyLevel = model.CompanyLevel;
+                process.Status = model.Status;
+                var list = model.ProcessStep;
+                if (list != null) 
+                {
+                    foreach (var item in list)
+                    {
+                        var processStep = await _context.ProcessSteps.FindAsync(item.Id);
+                        if (processStep != null) 
+                        {
+                            processStep.OrderIndex = item.OrderIndex;
+                            processStep.UserId = item.UserId;
+                            processStep.XPoint = item.XPoint;
+                            processStep.YPoint = item.YPoint;
+                            processStep.XPointPercent = item.XPointPercent;
+                            processStep.YPointPercent = item.YPointPercent;
+                            processStep.Width = item.Width;
+                            processStep.Height = item.Height;
+                            processStep.PageSign = item.PageSign;
+                            _context.ProcessSteps.Update(processStep);
+                        }
+                    }
+                
+                }
+                _context.Processes.Update(process);
                 await _context.SaveChangesAsync();
                 result.IsSuccess = true;
                 result.Code = 200;
                 result.IsSuccess = true;
                 await transaction.CommitAsync();
-                result.ResponseSuccess = _mapper.Map<List<ProcessUpdateModel>>(newProcess);
+                result.ResponseSuccess = process;
             }
             catch (Exception e)
             {

@@ -22,15 +22,15 @@ namespace Digital_BE.Controller
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> AssignProcessStep(ProcessStepCreateModel model, [Required][FromQuery] Guid ProcessId)
-        {
-            var result = await _service.AssignProcessStep(model, ProcessId);
+        //[HttpPost]
+        //public async Task<IActionResult> AssignProcessStep(ProcessStepCreateModel model, [Required][FromQuery] Guid ProcessId)
+        //{
+        //    var result = await _service.AssignProcessStep(model, ProcessId);
 
-            if (result.IsSuccess && result.Code == 200) 
-                return Ok(result);
-            return BadRequest(result);
-        }
+        //    if (result.IsSuccess && result.Code == 200) 
+        //        return Ok(result);
+        //    return BadRequest(result);
+        //}
 
         /// <summary>
         /// get a process step by Id
@@ -70,10 +70,10 @@ namespace Digital_BE.Controller
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut("{Id}")]
-        public async Task<IActionResult> Update(ProcessStepUpdateModel model, Guid Id)
+        [HttpPut]
+        public async Task<IActionResult> Update(ProcessStepUpdateModel model)
         {
-            var result = await _service.UpdateProcessStep(model, Id);
+            var result = await _service.UpdateProcessStep(model);
             if (result != null)
             {
                 return Ok(result);

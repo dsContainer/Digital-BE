@@ -15,6 +15,6 @@ namespace Digital.Infrastructure.Interface
         Task<ResultModel> GetProcessById(Guid id);
         Task<ResultModel> CreateProcess(ProcessCreateModel model);
         Task<int> DeleteProcess(Guid id);
-        Task<ResultModel> UpdateProcess(ProcessUpdateModel model, Guid Id);
+        Task<ResultModel> UpdateProcess(ProcessUpdateModel model);
     }
 }

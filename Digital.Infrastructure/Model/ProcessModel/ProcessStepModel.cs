@@ -27,11 +27,14 @@ namespace Digital.Infrastructure.Model.ProcessModel
     }
     public class ProcessStepUpdateModel : ProcessStepModel
     {
-
+        public Guid Id { get; set; }
+        public DateTime DateSign { get; set; }
+        public string? Message { get; set; }
     }
 
     public class ProcessStepViewModel : ProcessStepModel
     {
         public Guid Id { get; set; }
+       
     }
 }

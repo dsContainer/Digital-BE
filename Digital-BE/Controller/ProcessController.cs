@@ -83,10 +83,10 @@ namespace Digital_BE.Controller
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut("{Id}")]
-        public async Task<IActionResult> Update(ProcessUpdateModel model, Guid Id)
+        [HttpPut]
+        public async Task<IActionResult> Update(ProcessUpdateModel model)
         {
-            var result = await _service.UpdateProcess(model, Id);
+            var result = await _service.UpdateProcess(model);
             if (result != null)
             {
                 return Ok(result);

@@ -13,6 +13,6 @@ namespace Digital.Infrastructure.Interface
         Task<ResultModel> AssignProcessStep(ProcessStepCreateModel model, Guid ProcesssId);
         Task<ResultModel> GetProcessStepById(Guid id);
         Task<int> DeleteProcessStep(Guid id);
-        Task<ResultModel> UpdateProcessStep(ProcessStepUpdateModel model, Guid Id);
+        Task<ResultModel> UpdateProcessStep(ProcessStepUpdateModel model);
     }
 }

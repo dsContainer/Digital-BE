@@ -24,12 +24,12 @@ namespace Digital.Infrastructure.Mapper
             CreateMap<ProcessCreateModel, Process>();
             CreateMap<ProcessUpdateModel, Process>();
             #endregion
-
             #region ProcessStep
             CreateMap<ProcessStep, ProcessStepViewModel>();
             CreateMap<ProcessStepCreateModel, ProcessStep>();
             CreateMap<ProcessStepUpdateModel, ProcessStep>();
             #endregion
+
         }
     }
 }

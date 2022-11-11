@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static iTextSharp.text.pdf.AcroFields;
 
 namespace Digital.Infrastructure.Service
 {
@@ -70,7 +71,7 @@ namespace Digital.Infrastructure.Service
             var result = new ResultModel();
             try
             {
-                var processStep = await _context.Processes.FindAsync(id);
+                var processStep = await _context.ProcessSteps.FindAsync(id);
 
                 if (processStep == null)
                 {
@@ -94,14 +95,14 @@ namespace Digital.Infrastructure.Service
             return result;
         }
 
-        public async Task<ResultModel> UpdateProcessStep(ProcessStepUpdateModel model, Guid Id)
+        public async Task<ResultModel> UpdateProcessStep(ProcessStepUpdateModel model)
         {
             var result = new ResultModel();
             var transaction = _context.Database.BeginTransaction();
             try
             {
-                var process = await _context.ProcessSteps.FindAsync(Id);
-                if (process == null)
+                var processStep = await _context.ProcessSteps.FindAsync(model.Id);
+                if (processStep == null)
                 {
                     result.Code = 200;
                     result.IsSuccess = true;
@@ -109,14 +110,24 @@ namespace Digital.Infrastructure.Service
                     return result;
                 }
 
-                var newProcess = _mapper.Map<ProcessStep>(model);
-                _context.ProcessSteps.Update(newProcess);
+                processStep.OrderIndex = model.OrderIndex;
+                processStep.UserId = model.UserId;
+                processStep.XPoint = model.XPoint;
+                processStep.YPoint = model.YPoint;
+                processStep.XPointPercent = model.XPointPercent;
+                processStep.YPointPercent = model.YPointPercent;
+                processStep.Width = model.Width;
+                processStep.Height = model.Height;
+                processStep.PageSign = model.PageSign;
+                processStep.Message = model.Message;
+                processStep.DateSign = model.DateSign;
+                _context.ProcessSteps.Update(processStep);
                 await _context.SaveChangesAsync();
                 result.IsSuccess = true;
                 result.Code = 200;
                 result.IsSuccess = true;
                 await transaction.CommitAsync();
-                result.ResponseSuccess = _mapper.Map<List<ProcessStepUpdateModel>>(newProcess);
+                result.ResponseSuccess = processStep;
             }
             catch (Exception e)
             {
