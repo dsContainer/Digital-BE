@@ -18,9 +18,9 @@ namespace Digital.Data.Entities
         public virtual Template? Template { get; set; }
         public string? Status { get; set; }
         public string? CompanyLevel { get; set; }
-        [ForeignKey("ProcessStepId")]
-        public string? ProcessStepId { get; set; }
         public virtual ICollection<ProcessStep>? ProcessStep { get; set; } = new List<ProcessStep>();
+        public virtual ICollection<Batch>? Batch { get; set; } = new List<Batch>();
+
 
     }
 }

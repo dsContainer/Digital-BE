@@ -37,7 +37,7 @@ namespace Digital.Infrastructure.Service
 
                 result.IsSuccess = true;
                 result.Code = 200;
-                result.ResponseSuccess = _mapper.Map<ProcessModel>(process);
+                result.ResponseSuccess = _mapper.Map<Process>(process);
 
                 await transaction.CommitAsync();
             }
@@ -79,7 +79,7 @@ namespace Digital.Infrastructure.Service
                 
                 result.Code = 200;
                 result.IsSuccess = true;
-                result.ResponseSuccess = await _mapper.ProjectTo<Process>(processes).FirstOrDefaultAsync();
+                result.ResponseSuccess = processes;
 
             }
             catch (Exception e)
@@ -113,7 +113,7 @@ namespace Digital.Infrastructure.Service
 
                 result.Code = 200;
                 result.IsSuccess = true;
-                result.ResponseSuccess = await _mapper.ProjectTo<ProcessViewModel>(processes).ToListAsync();
+                result.ResponseSuccess = processes;
 
             }
             catch (Exception e)
@@ -131,7 +131,7 @@ namespace Digital.Infrastructure.Service
             var transaction = _context.Database.BeginTransaction();
             try
             {
-                var process = await _context.Documents.FindAsync(Id);
+                var process = await _context.Processes.FindAsync(Id);
                 if (process == null)
                 {
                     result.Code = 200;

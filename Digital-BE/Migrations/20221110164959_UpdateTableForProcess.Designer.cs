@@ -4,6 +4,7 @@ using Digital.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Digital_BE.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221110164959_UpdateTableForProcess")]
+    partial class UpdateTableForProcess
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace Digital_BE.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("BatchProcess", b =>
-                {
-                    b.Property<Guid>("BatchId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProcessId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("BatchId", "ProcessId");
-
-                    b.HasIndex("ProcessId");
-
-                    b.ToTable("BatchProcess");
-                });
 
             modelBuilder.Entity("Digital.Data.Entities.Batch", b =>
                 {
@@ -56,6 +43,9 @@ namespace Digital_BE.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProcessId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -142,6 +132,9 @@ namespace Digital_BE.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BatchId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("CompanyLevel")
                         .HasColumnType("nvarchar(max)");
 
@@ -165,9 +158,9 @@ namespace Digital_BE.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TemplateId")
-                        .IsUnique()
-                        .HasFilter("[TemplateId] IS NOT NULL");
+                    b.HasIndex("BatchId");
+
+                    b.HasIndex("TemplateId");
 
                     b.ToTable("Processes");
                 });
@@ -412,21 +405,6 @@ namespace Digital_BE.Migrations
                     b.ToTable("RoleUser");
                 });
 
-            modelBuilder.Entity("BatchProcess", b =>
-                {
-                    b.HasOne("Digital.Data.Entities.Batch", null)
-                        .WithMany()
-                        .HasForeignKey("BatchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Digital.Data.Entities.Process", null)
-                        .WithMany()
-                        .HasForeignKey("ProcessId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Digital.Data.Entities.Document", b =>
                 {
                     b.HasOne("Digital.Data.Entities.DocumentType", "Type")
@@ -456,9 +434,13 @@ namespace Digital_BE.Migrations
 
             modelBuilder.Entity("Digital.Data.Entities.Process", b =>
                 {
+                    b.HasOne("Digital.Data.Entities.Batch", null)
+                        .WithMany("Process")
+                        .HasForeignKey("BatchId");
+
                     b.HasOne("Digital.Data.Entities.Template", "Template")
-                        .WithOne("Process")
-                        .HasForeignKey("Digital.Data.Entities.Process", "TemplateId");
+                        .WithMany()
+                        .HasForeignKey("TemplateId");
 
                     b.Navigation("Template");
                 });
@@ -526,6 +508,11 @@ namespace Digital_BE.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Digital.Data.Entities.Batch", b =>
+                {
+                    b.Navigation("Process");
+                });
+
             modelBuilder.Entity("Digital.Data.Entities.DocumentType", b =>
                 {
                     b.Navigation("Documents");
@@ -536,11 +523,6 @@ namespace Digital_BE.Migrations
             modelBuilder.Entity("Digital.Data.Entities.Process", b =>
                 {
                     b.Navigation("ProcessStep");
-                });
-
-            modelBuilder.Entity("Digital.Data.Entities.Template", b =>
-                {
-                    b.Navigation("Process");
                 });
 
             modelBuilder.Entity("Digital.Data.Entities.User", b =>

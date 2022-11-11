@@ -20,6 +20,7 @@ namespace Digital.Data.Entities
         public Guid DocumentTypeId { get; set; }
 
         public virtual DocumentType? DocumentType { get; set; }
+        public virtual Process? Process { get; set; }
 
     }
 }

@@ -14,8 +14,8 @@ namespace Digital.Infrastructure.Model.ProcessModel
         public Guid? TemplateId { get; set; }
         public string? Status { get; set; } = "Active";
         public string? CompanyLevel { get; set; }
-        public string? ProcessStepId { get; set; }
-        public virtual ICollection<ProcessStepModel>? ProcessStep { get; set; } = new List<ProcessStepModel>();
+        public Guid? ProcessStepId { get; set; }
+        //public virtual ICollection<ProcessStepModel>? ProcessStep { get; set; } = new List<ProcessStepModel>();
     }
 
     public class ProcessCreateModel : ProcessModel
@@ -28,6 +28,9 @@ namespace Digital.Infrastructure.Model.ProcessModel
     public class ProcessViewModel : ProcessModel
     {
         public Guid Id { get; set; }
+        public virtual Template? Template { get; set; }
+
+        public virtual ICollection<ProcessStep>? ProcessStep { get; set; } = new List<ProcessStep>();
     }
 
     public class ProcessSearchModel

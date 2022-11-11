@@ -19,5 +19,19 @@ namespace Digital.Infrastructure.Model.ProcessModel
         public float Width { get; set; }
         public float Height { get; set; }
         public int PageSign { get; set; }
+
+    }
+    public class ProcessStepCreateModel : ProcessStepModel
+    {
+
+    }
+    public class ProcessStepUpdateModel : ProcessStepModel
+    {
+
+    }
+
+    public class ProcessStepViewModel : ProcessStepModel
+    {
+        public Guid Id { get; set; }
     }
 }

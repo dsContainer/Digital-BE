@@ -30,9 +30,5 @@ namespace Digital.Data.Entities
         public Guid? ProcessId { get; set; }
         public virtual Process? Process { get; set; }
 
-
-
-
-
     }
 }

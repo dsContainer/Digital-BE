@@ -16,8 +16,6 @@ namespace Digital.Data.Entities
         public string? Description { get; set; }
 
         public virtual ICollection<Process>? Process { get; set; } = new List<Process>();
-        [ForeignKey("ProcessId")]
-        public string? ProcessId { get; set; }
 
     }
 }

@@ -13,8 +13,6 @@ namespace Digital.Infrastructure.Interface
     {
         Task<ResultModel> GetProcesses(ProcessSearchModel searchModel);
         Task<ResultModel> GetProcessById(Guid id);
-        Task<ResultModel> GetProcessByDocumentType(Guid docTypeId);
-        Task<ResultModel> GetProcessByCreatedDate(DateTime createdDate);
         Task<ResultModel> CreateProcess(ProcessCreateModel model);
         Task<int> DeleteProcess(Guid id);
         Task<ResultModel> UpdateProcess(ProcessUpdateModel model, Guid Id);

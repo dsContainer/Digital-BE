@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Metrics;
 using System.Reflection;
 using System.Reflection.Emit;
 using Digital.Data.Entities;
@@ -19,6 +20,10 @@ namespace Digital.Data.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.Entity<Template>()
+            .HasOne(a => a.Process)
+            .WithOne(a => a.Template)
+            .HasForeignKey<Process>(c => c.TemplateId);
         }
 
         #region
